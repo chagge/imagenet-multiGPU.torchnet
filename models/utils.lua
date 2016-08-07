@@ -38,7 +38,7 @@ function utils.makeDataParallelTable(model, nGPU)
          :add(model, gpus)
          :threads(function()
             local cudnn = require 'cudnn'
-            require '../scalegrad'
+            require '../utils/scalegrad'
             cudnn.fastest, cudnn.benchmark = fastest, benchmark
          end)
       dpt.gradInput = nil
