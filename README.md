@@ -1,6 +1,7 @@
 ## imagenet-multiGPU.torchnet
 
 Basic Torchnet code for Imagenet Classification
+* I was not planning to publish this, but I will clean it up in a few days, to match imagenet-multiGPU.torch
 
 * datagen.lua : create t7 file from imagenet like directory
 * train.lua : Main training file
