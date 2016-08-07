@@ -84,23 +84,23 @@ local function getIterator(mode, nEpoch)
                input =
                   mode == 'train' and
                      tnt.transform.compose{
-                        -- t.Fix(),
-                        --t.RandomSizedCrop(224),
-                        -- t.ColorJitter({
-                        --    brightness = 0.4,
-                        --    contrast = 0.4,
-                        --    saturation = 0.4,
-                        -- }),
-                        -- t.Lighting(0.1, pca.eigval, pca.eigvec),
-                        -- t.ColorNormalize(dataset.meanstd),
-                        -- t.HorizontalFlip(0.5),
+                        t.Fix(),
+                        t.RandomSizedCrop(224),
+                         t.ColorJitter({
+                            brightness = 0.4,
+                            contrast = 0.4,
+                            saturation = 0.4,
+                        }),
+                        t.Lighting(0.1, pca.eigval, pca.eigvec),
+                        t.ColorNormalize(dataset.meanstd),
+                        t.HorizontalFlip(0.5),
                      }
                   or mode == 'val' and
                      tnt.transform.compose{
-                        -- t.Fix(),
-                        -- --t.Scale(256),
-                        -- t.ColorNormalize(dataset.meanstd),
-                        --t.CenterCrop(224),
+                        t.Fix(),
+                        t.Scale(256),
+                        t.ColorNormalize(dataset.meanstd),
+                        t.CenterCrop(224),
                      }
             }
             classes[#classes+1] = mode == 'train' and list:shuffle(avg_size,true) or list:shuffle()
