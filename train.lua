@@ -42,7 +42,7 @@ local optimState = {
    nesterov = opt.nesterov,
 }
 -----------
-local model = opt.factor == 99 and dofile(opt.model)(#dataset.classes,opt.factor)
+local model = opt.factor ~= 99 and dofile(opt.model)(#dataset.classes,opt.factor)
                or dofile(opt.model)(#dataset.classes)
 cudnn.convert(model, cudnn)
 model = utils.makeDataParallelTable(model, opt.nGPU)
@@ -103,7 +103,7 @@ local function getIterator(mode, nEpoch)
                         t.CenterCrop(224),
                      }
             }
-            classes[#classes+1] = mode == 'train' and list:shuffle(avg_size,true) or list:shuffle()
+            classes[#classes+1] = list:shuffle() -- mode == 'train' and list:shuffle(avg_size,true) or list:shuffle()
          end
          return tnt.ConcatDataset{datasets = classes}:shuffle():batch(opt.batchSize,'skip-last')
       end,
